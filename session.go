@@ -289,7 +289,7 @@ func (wac *Conn) RestoreSession(session Session) (Session, error) {
 		}
 	case <-time.After(wac.msgTimeout):
 		wac.session = nil
-		return Session{}, fmt.Errorf("restore session connection timed out")
+		//return Session{}, fmt.Errorf("restore session connection timed out")
 	}
 
 	//check if challenge is present
