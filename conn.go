@@ -14,9 +14,9 @@ import (
 	"sync"
 	"time"
 
+	"github.com/MaiaVinicius/websocket"
 	"github.com/Rhymen/go-whatsapp/binary"
 	"github.com/Rhymen/go-whatsapp/crypto/cbc"
-	"github.com/gorilla/websocket"
 )
 
 type metric byte
@@ -165,7 +165,7 @@ func (wac *Conn) connect() error {
 	}
 
 	wsConn.SetCloseHandler(func(code int, text string) error {
-		fmt.Fprintf(os.Stderr, "websocket connection closed(%d, %s)\n", code, text)
+		//fmt.Fprintf(os.Stderr, "websocket connection closed(%d, %s)\n", code, text)
 
 		// from default CloseHandler
 		message := websocket.FormatCloseMessage(code, "")
@@ -273,7 +273,7 @@ func (wac *Conn) readPump() {
 		if err != nil {
 			wac.wsConnOK = false
 			if websocket.IsUnexpectedCloseError(err, websocket.CloseGoingAway) {
-				wac.handle(fmt.Errorf("unexpected websocket close: %v", err))
+				//wac.handle(fmt.Errorf("unexpected websocket close: %v", err))
 			}
 			// sleep for a second and retry reading the next message
 			time.Sleep(time.Second)
